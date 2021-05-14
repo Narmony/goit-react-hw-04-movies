@@ -1,0 +1,21 @@
+.listCard {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+}
+.itemCard {
+  width: 150px;
+  padding: 10px;
+}
+.imgActor {
+  width: 100px;
+}
+
+h4 {
+  margin: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

@@ -1,17 +1,35 @@
-import { Component } from "react";
-import "./styles.css";
-// import { v4 as uuidv4 } from 'uuid';
+import { Suspense, lazy } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import routes from './routes';
+import AppBar from './components/AppBar/AppBar';
+import './styles.css';
 
-class App extends Component {
-  state = {};
+const HomePage = lazy(() =>
+  import('./views/HomePage/HomePage.jsx' /* webpackChunkName: "home-page" */),
+);
+const MoviesPage = lazy(() =>
+  import('./views/MoviesPage/MoviesPage' /* webpackChunkName: "movies-page" */),
+);
+const MovieDetailPage = lazy(() =>
+  import(
+    './views/MovieDetailsPage' /* webpackChunkName: "movie-details-page" */
+  ),
+);
+const NotFoundView = lazy(() =>
+  import('./views/NotFoundView' /* webpackChunkName: "not-found-page" */),
+);
 
-  componentDidMount() {}
-  componentDidUpdate(prevProps, prevState) {
-    // console.log('app component did update');
-  }
-
-  render() {
-    return <div className="app"></div>;
-  }
-}
+const App = () => (
+  <>
+    <AppBar />
+    <Suspense fallback={<h1>Downloads...</h1>}>
+      <Switch>
+        <Route path={routes.home} exact component={HomePage} />
+        <Route path={routes.movieDetailPage} component={MovieDetailPage} />
+        <Route path={routes.moviesPage} component={MoviesPage} />
+        <Route component={NotFoundView} />
+      </Switch>
+    </Suspense>
+  </>
+);
 export default App;
