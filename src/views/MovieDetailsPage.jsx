@@ -59,6 +59,7 @@ class MovieDetailPage extends Component {
 
   handleGoBack = () => {
     const { location, history } = this.props;
+
     if (location.state && location.state.from) {
       return history.push(location.state.from);
     }
@@ -72,6 +73,7 @@ class MovieDetailPage extends Component {
     const vote = vote_average * 10;
     const { match } = this.props;
 
+    console.log(this.props.location.state);
     return (
       <>
         <button type="button" className="backBtn" onClick={this.handleGoBack}>
@@ -94,12 +96,25 @@ class MovieDetailPage extends Component {
         <h2 className="extraInfo">Additional information</h2>
         <ul>
           <li>
-            <NavLink exact to={`${match.url}/cast`}>
+            <NavLink
+              exact
+              to={{
+                pathname: `${match.url}/cast`,
+                state: { ...this.props.location.state },
+              }}
+            >
               Cast
             </NavLink>
           </li>
           <li>
-            <NavLink to={`${match.url}/reviews`}>Reviews</NavLink>
+            <NavLink
+              to={{
+                pathname: `${this.props.match.url}/reviews`,
+                state: { ...this.props.location.state },
+              }}
+            >
+              Reviews
+            </NavLink>
           </li>
         </ul>
 

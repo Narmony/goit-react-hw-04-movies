@@ -3,6 +3,7 @@ import styles from './movieGallery.module.css';
 import routes from '../../routes';
 
 const MovieGallery = ({ movies, location }) => {
+  // console.log(location.state);
   return (
     <>
       <ul className={styles.movieGallery}>
